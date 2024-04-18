@@ -1,36 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int MAX_N = 1e6 + 5;
-
-string S;
-
 int main() {
-    cin.tie(nullptr)->sync_with_stdio(false);
+    cin.tie(0)->sync_with_stdio(0);
+    int n; cin >> n;
+    char S[n + 5] = {};
+    for (int i = 1; i <= n; i++) {
+        cin >> S[i];
+    }
 
-    int N;
-    cin >> N >> S;
+    long long ans = 0;
+    long long sum = 0;
+    stack<int> st;
+    for (int i = 1; i <= n; i++) {
+        if (S[i] == 'T') {
+            int prev = 0;
+            if (!st.empty()) prev = st.top(), st.pop();
+            sum += i - prev;
 
-    S = '#' + S;
-
-    long long ans = 0, cur_sum = 0;
-    int cntT = 0;
-    stack <pair <int, int>> stk;
-    stk.emplace(N, 0);
-    for (int i = 1; i <= N; i++) {
-        if (S[i] == 'F') cntT = 0;
-        else {
-            cntT++;
-            while (!stk.empty() and stk.top().first < cntT) stk.pop();
-
-            cur_sum += i - stk.top().second;
-
-            if (i + 1 <= N and S[i + 1] == 'F') {
-                for (int j = cntT; j >= 1; j--) stk.emplace(j, i - j + 1);
+            if (i + 1 <= n and S[i + 1] == 'F') {
+                int start = 0;
+                for (int j = i; S[j] == 'T' and j >= 1; j--) start = j;
+                for (int j = start; j <= i; j++) st.push(j);
             }
         }
-        ans += cur_sum;
+
+        ans += sum;
     }
-    cout << ans;
-    return 0;
+
+    cout << ans << "\n";
 }
