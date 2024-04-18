@@ -52,6 +52,7 @@ int main() {
                 if (sum[i][mid - i] >= L) pl = mid, r = mid - 1;
                 else l = mid + 1;
             }
+
             l = i, r = min(N - k + 1, (int)sum[i].size() + i - 1);
             while (l <= r) {
                 int mid = (l + r) / 2;
@@ -59,6 +60,7 @@ int main() {
                 if (sum[i][mid - i] <= H) pr = mid, l = mid + 1;
                 else r = mid - 1;
             }
+            
             if (pl != -1 and pr != -1) dp[now][i] = (dp[nxt][pr + 1] - dp[nxt][pl] + MOD) % MOD;
             else dp[now][i] = 0;
         }
