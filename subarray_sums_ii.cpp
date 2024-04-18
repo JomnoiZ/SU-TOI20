@@ -9,14 +9,14 @@ int main() {
 
     long long sum = 0, ans = 0;
     map <long long, int> mp;
-    mp[0] = 1;
+    mp[x] = 1;
     for (int i = 0; i < n; i++) {
         int a;
         cin >> a;
 
         sum += a;
-        ans += mp[sum - x];
-        mp[sum]++;
+        ans += mp[sum];
+        mp[sum + x]++;
     }
     cout << ans;
     return 0;
