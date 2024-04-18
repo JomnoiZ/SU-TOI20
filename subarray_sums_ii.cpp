@@ -8,15 +8,15 @@ int main() {
     cin >> n >> x;
 
     long long sum = 0, ans = 0;
-    map <long long, int> mp;
-    mp[x] = 1;
+    map <long long, int> cnt;
+    cnt[x] = 1;
     for (int i = 0; i < n; i++) {
         int a;
         cin >> a;
 
         sum += a;
-        ans += mp[sum];
-        mp[sum + x]++;
+        ans += cnt[sum];
+        cnt[sum + x]++;
     }
     cout << ans;
     return 0;
